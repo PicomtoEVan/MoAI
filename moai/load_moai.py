@@ -13,10 +13,11 @@ def prepare_moai(moai_path, bits, grad_ckpt, lora, dtype):
         bnb_model_from_pretrained_args.update(dict(
             torch_dtype=torch.bfloat16 if dtype=='bf16' else torch.float16,
             low_cpu_mem_usage=True,
+            device_map=True,
             quantization_config=BitsAndBytesConfig(
                 load_in_4bit=bits == 4,
                 load_in_8bit=bits == 8,
-                llm_int8_skip_modules=["vision_tower", "vision_proj", "Plora_main", "moai", "output"],
+                llm_int8_skip_modules=["vision_tower", "vision_proj", "moai", "output"],
                 llm_int8_threshold=6.0,
                 llm_int8_has_fp16_weight=False,
                 bnb_4bit_compute_dtype=torch.bfloat16 if dtype=='bf16' else torch.float16,
