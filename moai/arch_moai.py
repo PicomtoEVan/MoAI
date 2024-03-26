@@ -155,9 +155,7 @@ class MoAIModel(InternLM2PreTrainedModel):
             
         # SGG Outputs
         from mmdet.apis import inference_detector
-        with torch.inference_mode():
-            sgg_results = inference_detector(sgg_model, imgs=[input.permute(1,2,0).cpu().numpy() for input in images])
-
+        
 
         batched_verb_prompt=[]
         batched_panoptic_map = []
@@ -289,7 +287,7 @@ class MoAIModel(InternLM2PreTrainedModel):
         verbalization_od, od_boxes, od_labels = make_od_prompt(od_results[0])
         
         # SGG
-        verbalization_sgg = make_sgg_prompt(sgg_results[0])
+        verbalization_sgg = ''
         
         # OCR
         verbalization_ocr = make_ocr_prompt(ocr_results[0])
