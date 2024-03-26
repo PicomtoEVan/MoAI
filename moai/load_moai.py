@@ -13,7 +13,7 @@ def prepare_moai(moai_path, bits, grad_ckpt, lora, dtype):
         bnb_model_from_pretrained_args.update(dict(
             torch_dtype=torch.bfloat16 if dtype=='bf16' else torch.float16,
             low_cpu_mem_usage=True,
-            device_map="auto",
+            device_map="cuda:0",
             quantization_config=BitsAndBytesConfig(
                 load_in_4bit=bits == 4,
                 load_in_8bit=bits == 8,
