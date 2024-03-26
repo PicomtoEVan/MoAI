@@ -88,7 +88,7 @@ def prepare_moai(moai_path, bits, grad_ckpt, lora, dtype):
 
     # load OCR
     from paddleocr import PaddleOCR
-    ocr_model = PaddleOCR(use_angle_cls=True, lang='ch', use_gpu=False, show_log=False)
+    ocr_model = PaddleOCR(use_angle_cls=True, lang='en', show_log=False)
     
     return moai_model, moai_processor, seg_model, seg_processor, od_model, od_processor, sgg_model, ocr_model
 
