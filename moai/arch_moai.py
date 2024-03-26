@@ -275,7 +275,7 @@ class MoAIModel(InternLM2PreTrainedModel):
         # SGG Outputs
         from mmdet.apis import inference_detector
         with torch.inference_mode():
-            sgg_results = inference_detector(sgg_model, imgs=[image.permute(1,2,0).cpu().numpy()])
+            sgg_results = inference_detector(sgg_model, imgs=[image.permute(1,2,0)])
 
         # OCR Outputs
         with torch.inference_mode():
