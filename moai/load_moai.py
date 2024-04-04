@@ -78,13 +78,8 @@ def prepare_moai(moai_path, bits, grad_ckpt, lora, dtype):
     od_model = Owlv2ForObjectDetection.from_pretrained('google/owlv2-base-patch16-ensemble').cuda()
     od_processor = AutoProcessor.from_pretrained('google/owlv2-base-patch16-ensemble')
 
-    # load SGG
-    import sys
-    sys.path.append('moai/sgg')
-    from mmengine import Config
-    from mmdet.apis import init_detector
-    cfg = Config.fromfile('moai/sgg/configs/psgtr/psgtr_r50_psg_inference.py')
-    sgg_model = init_detector(cfg, 'moai/sgg/checkpoints/psgtr_r50_epoch_60.pth', palette="none").cuda()
+
+    sgg_model = None
 
     # load OCR
     from paddleocr import PaddleOCR
